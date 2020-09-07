@@ -4,7 +4,9 @@ import styles from './Landing.module.scss';
 
 const Landing = () => (
   <div className={styles.Landing} data-testid="Landing">
-    Landing Component
+    <h2>
+    Create introductory info here plus account login/registration links
+    </h2>
   </div>
 );
 
