@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import styles from './Landing.module.scss';
-import AdminLTE, { Sidebar, Content, Row, Col, Box, Button } from 'adminlte-2-react';
+import AdminLTE, { Sidebar, Content, Row, Col, Box, Button } from 'adminlte-react';
 
 const Landing = () => (
   <div className={styles.Landing} data-testid="Landing">
