@@ -32,7 +32,7 @@ class EmployerSignup extends Component {
     e.preventDefault();
     this.setState({ isLoading: true });
     axios
-      .post("http://localhost:8000/api/employee", this.state.signupEmployerData)
+      .post("http://localhost:8000/api/requester", this.state.signupEmployerData)
       .then((response) => {
         this.setState({ isLoading: false });
         if (response.data.status === 200) {
@@ -41,20 +41,20 @@ class EmployerSignup extends Component {
             signupEmployerData: {
               providerName: "",
               email: "",
-              phone: "",
               password: "",
+              description: ""
             },
           });
           setTimeout(() => {
             this.setState({ msg: "" });
-          }, 3000);
+          }, 4000);
         }
 
         if (response.data.status === "failed") {
           this.setState({ msg: response.data.message });
           setTimeout(() => {
             this.setState({ msg: "" });
-          }, 3000);
+          }, 4000);
         }
       });
   };
@@ -119,7 +119,8 @@ class EmployerSignup extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor>Description</label>
+                <label htmlFor>Description</label>
+                <div className="col-md-7">
                   <textarea
                     className="form-control"
                     name="description"
@@ -129,8 +130,11 @@ class EmployerSignup extends Component {
                     defaultValue={""}
                   />
                 </div>
+                </div>
+                <p className="text-orange">{this.state.msg}</p>
 
                 <div className="row">
+                  <div className="col-md-4">
                   <input
                     name="register"
                     id="register"
@@ -139,15 +143,17 @@ class EmployerSignup extends Component {
                     defaultValue="Create Account"
                     onClick={this.onSubmitHandler}
                   />
+                  </div>
+                  <div className="col-md-8">
                   {isLoading ? (
-                    <span
-                      className="spinner-border spinner-border-sm ml-5"
-                      role="status"
-                      aria-hidden="true"
-                    ></span>
+                   <button className="btn btn-success" type="button" disabled>
+                    <span className="spinner-grow spinner-grow-sm text-warning" role="status" aria-hidden="true" />
+                    Loading...
+                  </button>
                   ) : (
                     <span></span>
                   )}
+                  </div>
                 </div>
               </div>
             </div>
