@@ -5,13 +5,16 @@ import Signin from './components/Signin/Signin';
 import Dashboard from './components/Dashboard/Dashboard';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Aside from './components/Aside/Aside';
 import './App.css';
 
 function App() {
   return (
     <div>
-    <Header/>
-    <Footer/>
+      <Landing/>
+    {/* <Header/>
+    <Aside/>
+    <Footer/> */}
       </div>
     // <Router>
     // <Switch>
