@@ -19,7 +19,7 @@ function App() {
       <Route exact path="/login" component={Signin} />
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/employer-signup" component={EmployerSignup} />
-      <Route exact path="/serviceprovider-signup" component={ProviderSignup} />
+      <Route exact path="/provider-signup" component={ProviderSignup} />
       <Route exact={true} path="*" component={Landing} />
     </Switch>
     </Router>

@@ -15,9 +15,11 @@ class EmployerSignup extends Component {
         providerName: "",
         email: "",
         password: "",
+        confirmPassword: "",
         description: "",
         isLoading: "",
       },
+      errors: {},
       msg: "",
     };
   }
@@ -32,7 +34,10 @@ class EmployerSignup extends Component {
     e.preventDefault();
     this.setState({ isLoading: true });
     axios
-      .post("http://localhost:8000/api/requester", this.state.signupEmployerData)
+      .post(
+        "http://localhost:8000/api/requester",
+        this.state.signupEmployerData
+      )
       .then((response) => {
         this.setState({ isLoading: false });
         if (response.data.status === 200) {
@@ -42,7 +47,8 @@ class EmployerSignup extends Component {
               providerName: "",
               email: "",
               password: "",
-              description: ""
+              confirmPassword: "",
+              description: "",
             },
           });
           setTimeout(() => {
@@ -58,6 +64,28 @@ class EmployerSignup extends Component {
         }
       });
   };
+  
+  validate() {
+    let pass = this.state.signupProviderData.password;
+    let confirmP = this.state.signupProviderData.confirmPassword;
+    let errors = {};
+    let isValid = true;
+
+    if (!confirmP) {
+      isValid = false;
+      errors[confirmP] = "Please confirm your password.";
+    }
+    if (typeof pass !== "undefined" && typeof confirmP !== "undefined") {
+      if (pass !== confirmP) {
+        isValid = false;
+        errors[pass] = "Passwords do not match.";
+      }
+    } 
+    this.setState({
+      errors: errors
+    });
+    return isValid;
+  }
 
   render() {
     const isLoading = this.state.isLoading;
@@ -70,7 +98,7 @@ class EmployerSignup extends Component {
               <div className="form-group">
                 <div className="row">
                   <div className="col-md-3">
-                    <label>Name</label>
+                    <label>Employer's Name</label>
                   </div>
                   <div className="col-md-4">
                     <input
@@ -80,7 +108,7 @@ class EmployerSignup extends Component {
                       value={this.state.signupEmployerData.providerName}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
-                      placeholder="Employer Name"
+                      placeholder="Jane Doe"
                     />
                   </div>
                 </div>
@@ -97,7 +125,7 @@ class EmployerSignup extends Component {
                       value={this.state.signupEmployerData.email}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
-                      placeholder="Employer Email"
+                      placeholder="TestMail@mail.org"
                     />
                   </div>
                 </div>
@@ -114,45 +142,74 @@ class EmployerSignup extends Component {
                       value={this.state.signupEmployerData.password}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
-                      placeholder="Password"
+                      placeholder="*********"
                     />
                   </div>
                 </div>
-                <div className="form-group">
-                <label htmlFor>Description</label>
-                <div className="col-md-7">
-                  <textarea
-                    className="form-control"
-                    name="description"
-                    value={this.state.signupEmployerData.description}
-                    onChange={this.onChangehandler}
-                    rows={3}
-                    defaultValue={""}
-                  />
-                </div>
-                </div>
-                <p className="text-orange">{this.state.msg}</p>
-
+                <br />
                 <div className="row">
-                  <div className="col-md-4">
-                  <input
-                    name="register"
-                    id="register"
-                    className="btn btn-primary"
-                    type="button"
-                    defaultValue="Create Account"
-                    onClick={this.onSubmitHandler}
-                  />
+                  <div className="col-md-3">
+                    <label>Confirm Password</label>
                   </div>
-                  <div className="col-md-8">
-                  {isLoading ? (
-                   <button className="btn btn-success" type="button" disabled>
-                    <span className="spinner-grow spinner-grow-sm text-warning" role="status" aria-hidden="true" />
-                    Loading...
-                  </button>
-                  ) : (
-                    <span></span>
-                  )}
+                  <div className="col-md-4">
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="confirmPassword"
+                      value={this.state.signupEmployerData.confirmPassword}
+                      onChange={this.onChangehandler}
+                      aria-describedby="helpId"
+                      placeholder="*********"
+                    />
+                    <div className="text-danger">{this.state.errors.confirmPassword}</div>
+                  </div>
+                </div>
+                <br/>
+                <div className="row">
+                  <div className="col-md-3">
+                    <label htmlFor>Description</label>
+                  </div>
+                  <div className="col-md-4">
+                    <textarea
+                      className="form-control"
+                      name="description"
+                      value={this.state.signupEmployerData.description}
+                      onChange={this.onChangehandler}
+                      rows={3}
+                      defaultValue={"NA"}
+                    />
+                  </div>
+                </div>
+                <br/>
+                <div className="row">
+                  <div className="col-md-6">
+                    {isLoading ? (
+                      <button
+                        className="btn btn-success"
+                        type="button"
+                        disabled
+                      >
+                        <span
+                          className="spinner-grow spinner-grow-sm text-warning"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                        Please wait...
+                      </button>
+                    ) : (
+                      <span></span>
+                    )}
+                  <p className="text-orange">{this.state.msg}</p>
+                  </div>
+                  <div className="col-md-5">
+                    <input
+                      name="register"
+                      id="register"
+                      className="btn btn-primary"
+                      type="button"
+                      defaultValue="Create Account"
+                      onClick={this.onSubmitHandler}
+                    />
                   </div>
                 </div>
               </div>
