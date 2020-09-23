@@ -17,7 +17,6 @@ class ProviderSignup extends Component {
         designation: "",
         isLoading: "",
       },
-      // errs: {},
       msg: "",
     };
   }
@@ -42,7 +41,6 @@ class ProviderSignup extends Component {
               employeeName: "",
               email: "",
               password: "",
-              // confirmPassword: "",
               description: "",
               designation: "",
             },
@@ -60,28 +58,6 @@ class ProviderSignup extends Component {
         }
       });
   };
-
-  // validate() {
-  //   let pass = this.state.signupProviderData.password;
-  //   let confirmP = this.state.signupProviderData.confirmPassword;
-  //   let errs = {};
-  //   let isValid = true;
-
-  //   if (!confirmP) {
-  //     isValid = false;
-  //     errs["confirmPassword"] = "Please confirm your password.";
-  //   }
-  //   if (typeof pass !== "undefined" && typeof confirmP !== "undefined") {
-  //     if (pass !== confirmP) {
-  //       isValid = false;
-  //       errs["password"] = "Passwords do not match.";
-  //     }
-  //   } 
-  //   this.setState({
-  //     errors: errs
-  //   });
-  //   return isValid;
-  // }
 
   render() {
     const isLoading = this.state.isLoading;
@@ -142,23 +118,6 @@ class ProviderSignup extends Component {
                     />
                   </div>
                 </div>
-                {/* <br />
-                <div className="row">
-                  <div className="col-md-4">
-                    <label>Confirm Password</label>
-                  </div>
-                  <div className="col-md-4">
-                    <input
-                      type="password"
-                      className="form-control"
-                      name="confirmPassword"
-                      value={this.state.signupProviderData.confirmPassword}
-                      onChange={this.onChangehandler}
-                      aria-describedby="helpId"
-                      placeholder="*********"
-                    />
-                  </div>
-                </div> */}
                 <br />
                 <div className="row">
                   <div className="col-md-4">
@@ -171,7 +130,6 @@ class ProviderSignup extends Component {
                       value={this.state.signupProviderData.description}
                       onChange={this.onChangehandler}
                       rows={3}
-                      defaultValue={"NA"}
                       placeholder="Not exceeding 200 words"
                     />
                   </div>
