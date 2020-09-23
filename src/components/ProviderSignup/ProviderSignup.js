@@ -33,34 +33,37 @@ class ProviderSignup extends Component {
     e.preventDefault();
     this.setState({ isLoading: true });
     if (password === confirmPassword) {
-    axios
-      .post("http://localhost:8000/api/employee", this.state.signupProviderData)
-      .then((response) => {
-        this.setState({ isLoading: false });
-        if (response.data.status === 200) {
-          this.setState({
-            msg: response.data.message,
-            signupProviderData: {
-              employeeName: "",
-              email: "",
-              password: "",
-              confirmPassword: "",
-              description: "",
-              designation: "",
-            },
-          });
-          setTimeout(() => {
-            this.setState({ msg: "" });
-          }, 4000);
-        }
+      axios
+        .post(
+          "http://localhost:8000/api/employee",
+          this.state.signupProviderData
+        )
+        .then((response) => {
+          this.setState({ isLoading: false });
+          if (response.data.status === 200) {
+            this.setState({
+              msg: response.data.message,
+              signupProviderData: {
+                employeeName: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+                description: "",
+                designation: "",
+              },
+            });
+            setTimeout(() => {
+              this.setState({ msg: "" });
+            }, 4000);
+          }
 
-        if (response.data.status === "failed") {
-          this.setState({ msg: response.data.message });
-          setTimeout(() => {
-            this.setState({ msg: "" });
-          }, 4000);
-        }
-      });
+          if (response.data.status === "failed") {
+            this.setState({ msg: response.data.message });
+            setTimeout(() => {
+              this.setState({ msg: "" });
+            }, 4000);
+          }
+        });
     } else {
       alert("Sorry, Passwords do not match");
     }
@@ -74,30 +77,28 @@ class ProviderSignup extends Component {
           <div className="card">
             <div className="card-header">Signup Form</div>
             <div className="card-body">
-            {isLoading ? (
-                      <button
-                        className="btn btn-success"
-                        type="button"
-                        disabled
-                      >
-                        <span
-                          className="spinner-grow spinner-grow-sm text-warning"
-                          role="status"
-                          aria-hidden="true"
-                        />
-                        Please wait...
-                      </button>
-                    ) : (
-                      <span></span>
-                    )}
-              <h5 className={styles.msgAlert} role="alert">{this.state.msg}</h5>
+              {isLoading ? (
+                <button className="btn btn-success" type="button" disabled>
+                  <span
+                    className="spinner-grow spinner-grow-sm text-warning"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  Setting up your account, Please wait...
+                </button>
+              ) : (
+                <span></span>
+              )}
+              <h5 className={styles.msgAlert} role="alert">
+                {this.state.msg}
+              </h5>
               <div className="form-group">
                 <div className="row">
                   <div className="col-md-4">
                     <label>Service Provider's Name</label>
                   </div>
                   <div className="col-md-4">
-                  <input
+                    <input
                       type="text"
                       className="form-control"
                       name="employeeName"
@@ -124,7 +125,7 @@ class ProviderSignup extends Component {
                       placeholder="Providersmail@mail.org"
                     />
                   </div>
-                </div>                
+                </div>
                 <br />
                 <div className="row">
                   <div className="col-md-4">
@@ -147,17 +148,29 @@ class ProviderSignup extends Component {
                     <label>What's your Designation?</label>
                   </div>
                   <div className="col-md-4">
-                    <select className="custom-select" name="" id="" >
-                      <option defaultValue>Select your area of expertise</option>
-                      <option value="">Plumber</option>
-                      <option value="">Interior Designer</option>
-                      <option value="">Contractor</option>
-                      <option value="">Masonry</option>
-                      <option value="">Carpenter</option>
-                      <option value="">Electrician</option>
-                      <option value="">Engineer</option>
-                      <option value="">Architect</option>
-                      <option value="">Construction Expeditor</option>
+                    <select
+                      className="custom-select"
+                      name="designation"
+                      id=""
+                      defaultValue={this.state.signupProviderData.designation}
+                      onChange={this.onChangehandler}
+                    >
+                      <option defaultValue>
+                        Select your area of expertise
+                      </option>
+                      <option value="Plumber">Plumber</option>
+                      <option value="Interior Designer">
+                        Interior Designer
+                      </option>
+                      <option value="Contractor">Contractor</option>
+                      <option value="Masonry">Masonry</option>
+                      <option value="Carpenter">Carpenter</option>
+                      <option value="Electrician">Electrician</option>
+                      <option value="Engineer">Engineer</option>
+                      <option value="Architect">Architect</option>
+                      <option value="Construction Expeditor">
+                        Construction Expeditor
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -188,7 +201,9 @@ class ProviderSignup extends Component {
                       type="password"
                       className="form-control"
                       name="confirmPassword"
-                      defaultValue={this.state.signupProviderData.confirmPassword}
+                      defaultValue={
+                        this.state.signupProviderData.confirmPassword
+                      }
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="*********"
@@ -197,24 +212,7 @@ class ProviderSignup extends Component {
                 </div>
                 <br />
                 <div className="row">
-                  <div className="col-md-7">
-                    {isLoading ? (
-                      <button
-                        className="btn btn-success"
-                        type="button"
-                        disabled
-                      >
-                        <span
-                          className="spinner-grow spinner-grow-sm text-warning"
-                          role="status"
-                          aria-hidden="true"
-                        />
-                        Creating your account...
-                      </button>
-                    ) : (
-                      <span></span>
-                    )}
-                    <p className="text-orange">{this.state.msg}</p>
+                  <div className="col-md-7">                   
                   </div>
                   <div className="col-md-5">
                     <input
