@@ -13,6 +13,7 @@ class ProviderSignup extends Component {
         employeeName: "",
         email: "",
         password: "",
+        confirmPassword: "",
         description: "",
         designation: "",
         isLoading: "",
@@ -28,8 +29,10 @@ class ProviderSignup extends Component {
   };
 
   onSubmitHandler = (e) => {
+    const { password, confirmPassword } = this.state.signupProviderData;
     e.preventDefault();
     this.setState({ isLoading: true });
+    if (password === confirmPassword) {
     axios
       .post("http://localhost:8000/api/employee", this.state.signupProviderData)
       .then((response) => {
@@ -41,6 +44,7 @@ class ProviderSignup extends Component {
               employeeName: "",
               email: "",
               password: "",
+              confirmPassword: "",
               description: "",
               designation: "",
             },
@@ -57,6 +61,9 @@ class ProviderSignup extends Component {
           }, 4000);
         }
       });
+    } else {
+      alert("Sorry, Passwords do not match");
+    }
   };
 
   render() {
@@ -64,23 +71,40 @@ class ProviderSignup extends Component {
     return (
       <div className={styles.ProviderSignup} data-testid="ProviderSignup">
         <div className="container">
-          <div class="card">
-            <div class="card-header">Signup Form</div>
-            <div class="card-body">
+          <div className="card">
+            <div className="card-header">Signup Form</div>
+            <div className="card-body">
+            {isLoading ? (
+                      <button
+                        className="btn btn-success"
+                        type="button"
+                        disabled
+                      >
+                        <span
+                          className="spinner-grow spinner-grow-sm text-warning"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                        Please wait...
+                      </button>
+                    ) : (
+                      <span></span>
+                    )}
+              <h5 className={styles.msgAlert} role="alert">{this.state.msg}</h5>
               <div className="form-group">
                 <div className="row">
                   <div className="col-md-4">
                     <label>Service Provider's Name</label>
                   </div>
                   <div className="col-md-4">
-                    <input
+                  <input
                       type="text"
                       className="form-control"
                       name="employeeName"
-                      value={this.state.signupProviderData.employeeName}
+                      defaultValue={this.state.signupProviderData.employeeName}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
-                      placeholder="John Doe"
+                      placeholder="Jane Doe"
                     />
                   </div>
                 </div>
@@ -94,30 +118,13 @@ class ProviderSignup extends Component {
                       type="email"
                       className="form-control"
                       name="email"
-                      value={this.state.signupProviderData.email}
+                      defaultValue={this.state.signupProviderData.email}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="Providersmail@mail.org"
                     />
                   </div>
-                </div>
-                <br />
-                <div className="row">
-                  <div className="col-md-4">
-                    <label>Password</label>
-                  </div>
-                  <div className="col-md-4">
-                    <input
-                      type="password"
-                      className="form-control"
-                      name="password"
-                      value={this.state.signupProviderData.password}
-                      onChange={this.onChangehandler}
-                      aria-describedby="helpId"
-                      placeholder="*********"
-                    />
-                  </div>
-                </div>
+                </div>                
                 <br />
                 <div className="row">
                   <div className="col-md-4">
@@ -127,7 +134,7 @@ class ProviderSignup extends Component {
                     <textarea
                       className="form-control"
                       name="description"
-                      value={this.state.signupProviderData.description}
+                      defaultValue={this.state.signupProviderData.description}
                       onChange={this.onChangehandler}
                       rows={3}
                       placeholder="Not exceeding 200 words"
@@ -140,8 +147,8 @@ class ProviderSignup extends Component {
                     <label>What's your Designation?</label>
                   </div>
                   <div className="col-md-4">
-                    <select class="custom-select" name="" id="" >
-                      <option selected>Select your area of expertise</option>
+                    <select className="custom-select" name="" id="" >
+                      <option defaultValue>Select your area of expertise</option>
                       <option value="">Plumber</option>
                       <option value="">Interior Designer</option>
                       <option value="">Contractor</option>
@@ -152,6 +159,40 @@ class ProviderSignup extends Component {
                       <option value="">Architect</option>
                       <option value="">Construction Expeditor</option>
                     </select>
+                  </div>
+                </div>
+                <br />
+                <div className="row">
+                  <div className="col-md-4">
+                    <label>Password</label>
+                  </div>
+                  <div className="col-md-4">
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      defaultValue={this.state.signupProviderData.password}
+                      onChange={this.onChangehandler}
+                      aria-describedby="helpId"
+                      placeholder="*********"
+                    />
+                  </div>
+                </div>
+                <br />
+                <div className="row">
+                  <div className="col-md-4">
+                    <label>Confirm Password</label>
+                  </div>
+                  <div className="col-md-4">
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="confirmPassword"
+                      defaultValue={this.state.signupProviderData.confirmPassword}
+                      onChange={this.onChangehandler}
+                      aria-describedby="helpId"
+                      placeholder="*********"
+                    />
                   </div>
                 </div>
                 <br />

@@ -19,7 +19,6 @@ class EmployerSignup extends Component {
         description: "",
         isLoading: "",
       },
-      errors: {},
       msg: "",
     };
   }
@@ -51,7 +50,6 @@ class EmployerSignup extends Component {
                 password: "",
                 confirmPassword: "",
                 description: "",
-                errors: {},
               },
             });
             setTimeout(() => {
@@ -67,7 +65,7 @@ class EmployerSignup extends Component {
           }
         });
     } else {
-      alert("Passwords don't match");
+      alert("Sorry, Passwords do not match");
     }
   };
 
@@ -95,7 +93,7 @@ class EmployerSignup extends Component {
                     ) : (
                       <span></span>
                     )}
-                    <h5 className={styles.msgAlert} role="alert">{this.state.msg}</h5>
+              <h5 className={styles.msgAlert} role="alert">{this.state.msg}</h5>
               <div className="form-group">
                 <div className="row">
                   <div className="col-md-3">
@@ -106,7 +104,7 @@ class EmployerSignup extends Component {
                       type="text"
                       className="form-control"
                       name="providerName"
-                      value={this.state.signupEmployerData.providerName}
+                      defaultValue={this.state.signupEmployerData.providerName}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="Jane Doe"
@@ -123,7 +121,7 @@ class EmployerSignup extends Component {
                       type="email"
                       className="form-control"
                       name="email"
-                      value={this.state.signupEmployerData.email}
+                      defaultValue={this.state.signupEmployerData.email}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="TestMail@mail.org"
@@ -140,7 +138,7 @@ class EmployerSignup extends Component {
                       type="password"
                       className="form-control"
                       name="password"
-                      value={this.state.signupEmployerData.password}
+                      defaultValue={this.state.signupEmployerData.password}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="*********"
@@ -157,7 +155,7 @@ class EmployerSignup extends Component {
                       type="password"
                       className="form-control"
                       name="confirmPassword"
-                      value={this.state.signupEmployerData.confirmPassword}
+                      defaultValue={this.state.signupEmployerData.confirmPassword}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="*********"
@@ -173,7 +171,7 @@ class EmployerSignup extends Component {
                     <textarea
                       className="form-control"
                       name="description"
-                      value={this.state.signupEmployerData.description}
+                      defaultValue={this.state.signupEmployerData.description}
                       onChange={this.onChangehandler}
                       rows={3}
                     />
