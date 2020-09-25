@@ -54,6 +54,9 @@ class ProviderSignup extends Component {
     const { signupProviderData } = this.state;
     signupProviderData[e.target.name] = e.target.value;
     this.setState({ signupProviderData });
+    
+    //for test purposes
+    console.log(`Data:`, signupProviderData);
   };
 
   onSubmitHandler = (e) => {
@@ -132,6 +135,7 @@ class ProviderSignup extends Component {
                       name="employeeName"
                       defaultValue={this.state.signupProviderData.employeeName}
                       onChange={this.onChangehandler}
+                      autoFocus={true}
                       aria-describedby="helpId"
                       placeholder="Jane Doe"
                     />
@@ -177,8 +181,11 @@ class ProviderSignup extends Component {
                   </div>
                   <div className="col-md-4">               
                     <Select
+                    // value={this.state.signupProviderData.designation}
+                    onChange={this.onChangehandler}
                     styles = { optionStyles } 
-                    options = {options} />
+                    options = {options}
+                    />
                   </div>
                 </div>
                 <br />

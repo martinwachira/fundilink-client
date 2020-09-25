@@ -27,6 +27,9 @@ class EmployerSignup extends Component {
     const { signupEmployerData } = this.state;
     signupEmployerData[e.target.name] = e.target.value;
     this.setState({ signupEmployerData });
+
+     //for test purposes
+     console.log(`Data:`, signupEmployerData);
   };
 
   onSubmitHandler = (e) => {
