@@ -2,6 +2,34 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./ProviderSignup.module.scss";
 import axios from "axios";
+import Select from 'react-select';
+
+
+const options = [
+  {value: 'Plumber', label: 'Plumber'},
+  {value: 'Interior Designer', label: 'Interior Designer'},
+  {value: 'Contractor', label: 'Contractor'},
+  {value: 'Masonry', label: 'Masonry'},
+  {value: 'Carpenter', label: 'Carpenter'},
+  {value: 'Electrician', label: 'Electrician'},
+  {value: 'Engineer', label: 'Engineer'},
+  {value: 'Architect', label: 'Architect'},
+  {value: 'Construction Expeditor', label: 'Construction Expeditor'}
+]
+
+const optionStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    // borderBottom: '2px dotted #FFB14D',
+    // color: state.isSelected ? '#FFB14D' : 'black',
+    // backgroundColor: state.isSelected ? 'green' : 'white',
+    cursor: 'pointer'
+  }),
+  control: (provided) => ({
+    ...provided,
+    marginTop: "5%",
+  })
+}
 
 // const ProviderSignup = () => (
 class ProviderSignup extends Component {
@@ -147,31 +175,10 @@ class ProviderSignup extends Component {
                   <div className="col-md-4">
                     <label>What's your Designation?</label>
                   </div>
-                  <div className="col-md-4">
-                    <select
-                      className="custom-select"
-                      name="designation"
-                      id=""
-                      defaultValue={this.state.signupProviderData.designation}
-                      onChange={this.onChangehandler}
-                    >
-                      <option defaultValue>
-                        Select your area of expertise
-                      </option>
-                      <option value="Plumber">Plumber</option>
-                      <option value="Interior Designer">
-                        Interior Designer
-                      </option>
-                      <option value="Contractor">Contractor</option>
-                      <option value="Masonry">Masonry</option>
-                      <option value="Carpenter">Carpenter</option>
-                      <option value="Electrician">Electrician</option>
-                      <option value="Engineer">Engineer</option>
-                      <option value="Architect">Architect</option>
-                      <option value="Construction Expeditor">
-                        Construction Expeditor
-                      </option>
-                    </select>
+                  <div className="col-md-4">               
+                    <Select
+                    styles = { optionStyles } 
+                    options = {options} />
                   </div>
                 </div>
                 <br />
