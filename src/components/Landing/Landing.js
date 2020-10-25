@@ -1,9 +1,17 @@
-import React from 'react';
+import React,  { Component } from 'react';
 // import PropTypes from 'prop-types';
 import styles from './Landing.module.scss';
 import EmployerSignup from '../EmployerSignup/EmployerSignup';
+import { render } from 'node-sass';
 
-const Landing = () => (
+class Landing extends Component {
+state = {
+  selectedUser: ''
+}
+
+
+render(){
+  return(
  <div classname="{styles.Landing}" data-testid="Landing">
   <div className={styles.heads}>
   <nav className="navbar navbar-light bg-light">
@@ -26,10 +34,11 @@ const Landing = () => (
     </select>    
     </div>     
    </div>
-{/* <EmployerSignup /> */}
 </div>
 
 );
+}
+}
 
 Landing.propTypes = {};
 

@@ -5,31 +5,31 @@ import axios from "axios";
 import Select from 'react-select';
 
 
-const options = [
-  {value: 'Plumber', label: 'Plumber'},
-  {value: 'Interior Designer', label: 'Interior Designer'},
-  {value: 'Contractor', label: 'Contractor'},
-  {value: 'Masonry', label: 'Masonry'},
-  {value: 'Carpenter', label: 'Carpenter'},
-  {value: 'Electrician', label: 'Electrician'},
-  {value: 'Engineer', label: 'Engineer'},
-  {value: 'Architect', label: 'Architect'},
-  {value: 'Construction Expeditor', label: 'Construction Expeditor'}
-]
+// const options = [
+//   {value: 'Plumber', label: 'Plumber'},
+//   {value: 'Interior Designer', label: 'Interior Designer'},
+//   {value: 'Contractor', label: 'Contractor'},
+//   {value: 'Masonry', label: 'Masonry'},
+//   {value: 'Carpenter', label: 'Carpenter'},
+//   {value: 'Electrician', label: 'Electrician'},
+//   {value: 'Engineer', label: 'Engineer'},
+//   {value: 'Architect', label: 'Architect'},
+//   {value: 'Construction Expeditor', label: 'Construction Expeditor'}
+// ]
 
-const optionStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    // borderBottom: '2px dotted #FFB14D',
-    // color: state.isSelected ? '#FFB14D' : 'black',
-    // backgroundColor: state.isSelected ? 'green' : 'white',
-    cursor: 'pointer'
-  }),
-  control: (provided) => ({
-    ...provided,
-    marginTop: "5%",
-  })
-}
+// const optionStyles = {
+//   option: (provided, state) => ({
+//     ...provided,
+//     // borderBottom: '2px dotted #FFB14D',
+//     // color: state.isSelected ? '#FFB14D' : 'black',
+//     // backgroundColor: state.isSelected ? 'green' : 'white',
+//     cursor: 'pointer'
+//   }),
+//   control: (provided) => ({
+//     ...provided,
+//     marginTop: "5%",
+//   })
+// }
 
 // const ProviderSignup = () => (
 class ProviderSignup extends Component {
@@ -43,8 +43,8 @@ class ProviderSignup extends Component {
         password: "",
         confirmPassword: "",
         description: "",
-        designation: "",
         isLoading: "",
+        designation: "",
       },
       msg: "",
     };
@@ -101,6 +101,7 @@ class ProviderSignup extends Component {
   };
 
   render() {
+    console.log(this.state.signupProviderData.designation);
     const isLoading = this.state.isLoading;
     return (
       <div className={styles.ProviderSignup} data-testid="ProviderSignup">
@@ -180,12 +181,17 @@ class ProviderSignup extends Component {
                     <label>What's your Designation?</label>
                   </div>
                   <div className="col-md-4">               
-                    <Select
-                    // value={this.state.signupProviderData.designation}
+                    <select className="form-control"
+                    name="designation"
+                    defaultValue={this.state.signupProviderData.designation}
                     onChange={this.onChangehandler}
-                    styles = { optionStyles } 
-                    options = {options}
-                    />
+                    // styles = { optionStyles } 
+                    // options = {options}
+                    >
+                    <option></option>
+                    <option value="Des1">Des 1</option>
+                    <option value="Des2">Des 2</option>
+                    </select>
                   </div>
                 </div>
                 <br />
@@ -215,9 +221,7 @@ class ProviderSignup extends Component {
                       type="password"
                       className="form-control"
                       name="confirmPassword"
-                      defaultValue={
-                        this.state.signupProviderData.confirmPassword
-                      }
+                      defaultValue={this.state.signupProviderData.confirmPassword}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="*********"
