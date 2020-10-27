@@ -17,19 +17,19 @@ import Select from 'react-select';
 //   {value: 'Construction Expeditor', label: 'Construction Expeditor'}
 // ]
 
-// const optionStyles = {
-//   option: (provided, state) => ({
-//     ...provided,
-//     // borderBottom: '2px dotted #FFB14D',
-//     // color: state.isSelected ? '#FFB14D' : 'black',
-//     // backgroundColor: state.isSelected ? 'green' : 'white',
-//     cursor: 'pointer'
-//   }),
-//   control: (provided) => ({
-//     ...provided,
-//     marginTop: "5%",
-//   })
-// }
+const optionStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    // borderBottom: '2px dotted #FFB14D',
+    // color: state.isSelected ? '#FFB14D' : 'black',
+    // backgroundColor: state.isSelected ? 'green' : 'white',
+    cursor: 'pointer'
+  }),
+  control: (provided) => ({
+    ...provided,
+    marginTop: "5%",
+  })
+}
 
 // const ProviderSignup = () => (
 class ProviderSignup extends Component {
@@ -44,19 +44,19 @@ class ProviderSignup extends Component {
         confirmPassword: "",
         description: "",
         isLoading: "",
-        designation: "",
+        designation: ""
       },
       msg: "",
     };
   }
 
-  onChangeHandler = (e, key) => {
+  onChangehandler = (e, key) => {
     const { signupProviderData } = this.state;
     signupProviderData[e.target.name] = e.target.value;
     this.setState({ signupProviderData });
-    
-    //for test purposes
-    console.log(`Data:`, signupProviderData);
+
+     //for test purposes
+     console.log(`Data:`, signupProviderData);
   };
 
   onSubmitHandler = (e) => {
@@ -80,7 +80,7 @@ class ProviderSignup extends Component {
                 password: "",
                 confirmPassword: "",
                 description: "",
-                designation: "",
+                designation: ""
               },
             });
             setTimeout(() => {
@@ -185,12 +185,20 @@ class ProviderSignup extends Component {
                     name="designation"
                     defaultValue={this.state.signupProviderData.designation}
                     onChange={this.onChangehandler}
-                    // styles = { optionStyles } 
+                    styles = { optionStyles } 
                     // options = {options}
                     >
+                                        
                     <option></option>
-                    <option value="Des1">Des 1</option>
-                    <option value="Des2">Des 2</option>
+                    <option value="Plumber">Plumber</option>
+                    <option value="Interior Designer">Interior Designer</option>
+                    <option value="Contractor">Contractor</option>
+                    <option value="Masonry">Masonry</option>
+                    <option value="Carpenter">Carpenter</option>
+                    <option value="Electrician">Electrician</option>
+                    <option value="Engineer">Engineer</option>
+                    <option value="Architect">Architect</option>
+                    <option value="Construction Expeditor">Construction Expeditor</option>
                     </select>
                   </div>
                 </div>

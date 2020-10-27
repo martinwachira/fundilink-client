@@ -48,17 +48,16 @@ class Landing extends Component {
             </form>
           </nav>
         </div>
-        <div className="container">
-          <h3>Select user type here</h3>
+        <div className="container-fluid">
           <div className="form-group">
-            <label htmlFor="role">User Role</label>
+            <label htmlFor="role">Pick a User Role</label>
             <select
               className="custom-select"
               onChange={(e) =>
                 this.setState({ selectedUserType: e.target.value })
               }
             >
-              <option selected>Select role</option>
+              <option></option>
               <option value="EmployerSignup">Employer</option>
               <option value="ProviderSignup">Service Provider</option>
             </select>
@@ -69,7 +68,8 @@ class Landing extends Component {
   }
 
   renderSelectedUser(selectedUserType) {
-    if (!selectedUserType) return <p>"Pick a user bruh!"</p>;
+    if (!selectedUserType) 
+    return <p>"Pick a user bruh!"</p>;
 
     const User = Users[selectedUserType];
 
