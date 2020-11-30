@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./ProviderSignup.module.scss";
 import axios from "axios";
-import Select from 'react-select';
-
+import Select from "react-select";
+import { Link } from "react-router-dom";
 
 // const options = [
 //   {value: 'Plumber', label: 'Plumber'},
@@ -23,13 +23,13 @@ const optionStyles = {
     // borderBottom: '2px dotted #FFB14D',
     // color: state.isSelected ? '#FFB14D' : 'black',
     // backgroundColor: state.isSelected ? 'green' : 'white',
-    cursor: 'pointer'
+    cursor: "pointer",
   }),
   control: (provided) => ({
     ...provided,
     marginTop: "5%",
-  })
-}
+  }),
+};
 
 // const ProviderSignup = () => (
 class ProviderSignup extends Component {
@@ -37,17 +37,38 @@ class ProviderSignup extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      providers: [],
       signupProviderData: {
         employeeName: "",
         email: "",
         password: "",
         confirmPassword: "",
         description: "",
-        isLoading: "",
-        designation: ""
+        isLoading: true,
+        designation: "",
       },
       msg: "",
     };
+  }
+
+  componentDidMount() {
+    this._isMount = true;
+    this.getProviders();
+  }
+
+  async getProviders() {
+    axios
+      .get("http://localhost:8000/api/employee")
+      .then((res) => {
+        this.setState({ providers: res.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  componentWillUnmount() {
+    this._isMount = false;
   }
 
   onChangehandler = (e, key) => {
@@ -55,8 +76,8 @@ class ProviderSignup extends Component {
     signupProviderData[e.target.name] = e.target.value;
     this.setState({ signupProviderData });
 
-     //for test purposes
-     console.log(`Data:`, signupProviderData);
+    //for test purposes
+    //  console.log(`Data:`, signupProviderData);
   };
 
   onSubmitHandler = (e) => {
@@ -80,7 +101,7 @@ class ProviderSignup extends Component {
                 password: "",
                 confirmPassword: "",
                 description: "",
-                designation: ""
+                designation: "",
               },
             });
             setTimeout(() => {
@@ -101,8 +122,25 @@ class ProviderSignup extends Component {
   };
 
   render() {
-    console.log(this.state.signupProviderData.designation);
     const isLoading = this.state.isLoading;
+
+    let providerList = this.state.providers.map((provider) => {
+      return (
+        <div className="cont container-fluid" key={provider.id}>
+          <div className="card">
+            <div className="col s3 m4">
+              <span className="card-title">
+                <h4>{provider.employeeName}</h4>
+              </span>
+            </div>
+            <div className="container">
+                <h6>{provider.designation}</h6>
+                </div>
+          </div>
+        </div>
+      );
+    });
+
     return (
       <div className={styles.ProviderSignup} data-testid="ProviderSignup">
         <div className="container">
@@ -180,25 +218,29 @@ class ProviderSignup extends Component {
                   <div className="col-md-4">
                     <label>What's your Designation?</label>
                   </div>
-                  <div className="col-md-4">               
-                    <select className="form-control"
-                    name="designation"
-                    defaultValue={this.state.signupProviderData.designation}
-                    onChange={this.onChangehandler}
-                    styles = { optionStyles } 
-                    // options = {options}
+                  <div className="col-md-4">
+                    <select
+                      className="form-control"
+                      name="designation"
+                      defaultValue={this.state.signupProviderData.designation}
+                      onChange={this.onChangehandler}
+                      styles={optionStyles}
+                      // options = {options}
                     >
-                                        
-                    <option></option>
-                    <option value="Plumber">Plumber</option>
-                    <option value="Interior Designer">Interior Designer</option>
-                    <option value="Contractor">Contractor</option>
-                    <option value="Masonry">Masonry</option>
-                    <option value="Carpenter">Carpenter</option>
-                    <option value="Electrician">Electrician</option>
-                    <option value="Engineer">Engineer</option>
-                    <option value="Architect">Architect</option>
-                    <option value="Construction Expeditor">Construction Expeditor</option>
+                      <option></option>
+                      <option value="Plumber">Plumber</option>
+                      <option value="Interior Designer">
+                        Interior Designer
+                      </option>
+                      <option value="Contractor">Contractor</option>
+                      <option value="Masonry">Masonry</option>
+                      <option value="Carpenter">Carpenter</option>
+                      <option value="Electrician">Electrician</option>
+                      <option value="Engineer">Engineer</option>
+                      <option value="Architect">Architect</option>
+                      <option value="Construction Expeditor">
+                        Construction Expeditor
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -229,7 +271,9 @@ class ProviderSignup extends Component {
                       type="password"
                       className="form-control"
                       name="confirmPassword"
-                      defaultValue={this.state.signupProviderData.confirmPassword}
+                      defaultValue={
+                        this.state.signupProviderData.confirmPassword
+                      }
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="*********"
@@ -238,8 +282,7 @@ class ProviderSignup extends Component {
                 </div>
                 <br />
                 <div className="row">
-                  <div className="col-md-7">                   
-                  </div>
+                  <div className="col-md-7"></div>
                   <div className="col-md-5">
                     <input
                       name="register"
@@ -253,6 +296,11 @@ class ProviderSignup extends Component {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            {/* <Link to={`/individualProvider/${provider.id}`} className="btn btn-info">DETAILS</Link> */}
+            for test purposes
+            {providerList}
           </div>
         </div>
       </div>
