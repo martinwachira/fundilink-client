@@ -99,7 +99,7 @@ class EmployerSignup extends Component {
               <h5 className={styles.msgAlert} role="alert">{this.state.msg}</h5>
               <div className="form-group">
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <label>Employer's Name</label>
                   </div>
                   <div className="col-md-4">
@@ -116,7 +116,7 @@ class EmployerSignup extends Component {
                 </div>
                 <br />
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <label>Email</label>
                   </div>
                   <div className="col-md-4">
@@ -133,7 +133,7 @@ class EmployerSignup extends Component {
                 </div>
                 <br />
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <label>Password</label>
                   </div>
                   <div className="col-md-4">
@@ -150,7 +150,7 @@ class EmployerSignup extends Component {
                 </div>
                 <br />
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <label>Confirm Password</label>
                   </div>
                   <div className="col-md-4">
@@ -167,7 +167,7 @@ class EmployerSignup extends Component {
                 </div>
                 <br />
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-md-4">
                     <label htmlFor="desc">Description</label>
                   </div>
                   <div className="col-md-4">
@@ -182,7 +182,7 @@ class EmployerSignup extends Component {
                 </div>
                 <br />
                 <div className="row">                 
-                  <div className="col-md-6">
+                  <div className="col-md-7">
                   </div>
                   <div className="col-md-5">
                     <input

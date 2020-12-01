@@ -29,7 +29,6 @@ class Landing extends Component {
       <div classname="{styles.Landing}" data-testid="Landing">
         <div className={styles.heads}>
           <nav className="navbar navbar-light bg-light">
-            {/* <a className="navbar-brand">FundiLink</a> */}
             <p className="navbar-brand">FundiLink</p>
 
             <form className="form-inline">
@@ -69,7 +68,7 @@ class Landing extends Component {
 
   renderSelectedUser(selectedUserType) {
     if (!selectedUserType) 
-    return <p>"Pick a user bruh!"</p>;
+    return;
 
     const User = Users[selectedUserType];
 

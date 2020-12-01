@@ -129,13 +129,37 @@ class ProviderSignup extends Component {
         <div className="cont container-fluid" key={provider.id}>
           <div className="card">
             <div className="col s3 m4">
-              <span className="card-title">
+              {/* <span className="card-title">
                 <h4>{provider.employeeName}</h4>
-              </span>
+              </span> */}
             </div>
             <div className="container">
-                <h6>{provider.designation}</h6>
+              <div className="row">
+                <div className="col-md-1"></div>
+                <div className="col-md-3">
+                  <h5>{provider.employeeName}</h5>
                 </div>
+                <div className="col-md-2">
+                  <h6>{provider.designation}</h6>
+                </div>
+                <div className="col-md-2">
+                  <h6>{provider.email}</h6>
+                </div>
+                <div className="col-md-2">
+                  <h6>{provider.description}</h6>
+                </div>
+                <div className="col-md-2">
+                  <h7>
+                    <Link
+                      to={`/individualProvider/${provider.id}`}
+                      className="btn btn-warning"
+                    >
+                      DETAILS
+                    </Link>
+                  </h7>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -287,7 +311,7 @@ class ProviderSignup extends Component {
                     <input
                       name="register"
                       id="register"
-                      className="btn btn-primary"
+                      className="btn btn-success"
                       type="button"
                       defaultValue="Create Account"
                       onClick={this.onSubmitHandler}
@@ -297,11 +321,7 @@ class ProviderSignup extends Component {
               </div>
             </div>
           </div>
-          <div>
-            {/* <Link to={`/individualProvider/${provider.id}`} className="btn btn-info">DETAILS</Link> */}
-            for test purposes
-            {providerList}
-          </div>
+          <div>{providerList}</div>
         </div>
       </div>
     );
