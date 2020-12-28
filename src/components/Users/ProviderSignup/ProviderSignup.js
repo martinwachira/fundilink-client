@@ -169,7 +169,7 @@ class ProviderSignup extends Component {
       <div className={styles.ProviderSignup} data-testid="ProviderSignup">
         <div className="container">
           <div className="card">
-            <div className="card-header">Signup Form</div>
+            <div className="card-header">Service provider create account</div>
             <div className="card-body">
               {isLoading ? (
                 <button className="btn btn-success" type="button" disabled>

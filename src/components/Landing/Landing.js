@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import styles from "./Landing.module.scss";
 import * as Users from "../../components/Users";
+import { Link } from "react-router-dom";
 
 class Landing extends Component {
   state = {
@@ -10,8 +11,10 @@ class Landing extends Component {
   render() {
     return (
       <Fragment>
-        <div className="app-bar">
-          <h1 className="app-bar-title">User selector</h1>
+        <div className="app-bar container-fluid">
+          <Link to={"/"} className="navbar-brand">
+            User Selector
+          </Link>
         </div>
         <p className="app-section container">
           {this.renderUserSelector()}
@@ -29,8 +32,9 @@ class Landing extends Component {
       <div classname="{styles.Landing}" data-testid="Landing">
         <div className={styles.heads}>
           <nav className="navbar navbar-light bg-light">
-            <p className="navbar-brand">FundiLink</p>
-
+            <Link to={"/"} className="navbar-brand">
+              FundiLink
+            </Link>
             <form className="form-inline">
               <input
                 className="form-control mr-sm-2"
@@ -49,14 +53,18 @@ class Landing extends Component {
         </div>
         <div className="container-fluid">
           <div className="form-group">
-            <label htmlFor="role">Pick a User Role</label>
+            <h5 className={styles.ttle}>
+              Do you have an account? No? Well, worry not, create yours here.
+              Please pick a user role.
+            </h5>
+            <label htmlFor="role">Pick a user role here</label>
             <select
               className="custom-select"
               onChange={(e) =>
                 this.setState({ selectedUserType: e.target.value })
               }
             >
-              <option></option>
+              <option default></option>
               <option value="EmployerSignup">Employer</option>
               <option value="ProviderSignup">Service Provider</option>
             </select>
@@ -67,8 +75,7 @@ class Landing extends Component {
   }
 
   renderSelectedUser(selectedUserType) {
-    if (!selectedUserType) 
-    return;
+    if (!selectedUserType) return;
 
     const User = Users[selectedUserType];
 
