@@ -12,11 +12,12 @@ class EmployerSignup extends Component {
     super(props);
     this.state = {
       signupEmployerData: {
-        providerName: "",
+        role: 1,
+        name: "",
         email: "",
         password: "",
         confirmPassword: "",
-        description: "",
+        desc: "",
         isLoading: "",
       },
       msg: "",
@@ -29,7 +30,7 @@ class EmployerSignup extends Component {
     this.setState({ signupEmployerData });
 
      //for test purposes
-     console.log(`Data:`, signupEmployerData);
+    //  console.log(`Data:`, signupEmployerData);
   };
 
   onSubmitHandler = (e) => {
@@ -39,7 +40,7 @@ class EmployerSignup extends Component {
     if (password === confirmPassword) {
       axios
         .post(
-          "http://localhost:8000/api/requester",
+          "http://localhost:8000/user/api/register",
           this.state.signupEmployerData
         )
         .then((response) => {
@@ -48,11 +49,12 @@ class EmployerSignup extends Component {
             this.setState({
               msg: response.data.message,
               signupEmployerData: {
-                providerName: "",
+                role: 1,
+                name: "",
                 email: "",
                 password: "",
                 confirmPassword: "",
-                description: "",
+                desc: "",
               },
             });
             setTimeout(() => {
@@ -106,8 +108,8 @@ class EmployerSignup extends Component {
                     <input
                       type="text"
                       className="form-control"
-                      name="providerName"
-                      defaultValue={this.state.signupEmployerData.providerName}
+                      name="name"
+                      defaultValue={this.state.signupEmployerData.name}
                       onChange={this.onChangehandler}
                       aria-describedby="helpId"
                       placeholder="Jane Doe"
@@ -173,8 +175,8 @@ class EmployerSignup extends Component {
                   <div className="col-md-4">
                     <textarea
                       className="form-control"
-                      name="description"
-                      defaultValue={this.state.signupEmployerData.description}
+                      name="desc"
+                      defaultValue={this.state.signupEmployerData.desc}
                       onChange={this.onChangehandler}
                       rows={3}
                     />

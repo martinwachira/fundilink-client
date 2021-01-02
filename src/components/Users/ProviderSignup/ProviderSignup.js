@@ -39,13 +39,14 @@ class ProviderSignup extends Component {
     this.state = {
       providers: [],
       signupProviderData: {
-        employeeName: "",
+        role: 2,
+        name: "",
         email: "",
         password: "",
         confirmPassword: "",
-        description: "",
-        isLoading: true,
+        desc: "",
         designation: "",
+        isLoading: true,
       },
       msg: "",
     };
@@ -87,7 +88,7 @@ class ProviderSignup extends Component {
     if (password === confirmPassword) {
       axios
         .post(
-          "http://localhost:8000/api/employee",
+          "http://localhost:8000/api/user/register",
           this.state.signupProviderData
         )
         .then((response) => {
@@ -96,11 +97,12 @@ class ProviderSignup extends Component {
             this.setState({
               msg: response.data.message,
               signupProviderData: {
-                employeeName: "",
+                role: 2,
+                name: "",
                 email: "",
                 password: "",
                 confirmPassword: "",
-                description: "",
+                desc: "",
                 designation: "",
               },
             });
@@ -137,7 +139,7 @@ class ProviderSignup extends Component {
               <div className="row">
                 <div className="col-md-1"></div>
                 <div className="col-md-3">
-                  <h5>{provider.employeeName}</h5>
+                  <h5>{provider.name}</h5>
                 </div>
                 <div className="col-md-2">
                   <h6>{provider.designation}</h6>
@@ -146,7 +148,7 @@ class ProviderSignup extends Component {
                   <h6>{provider.email}</h6>
                 </div>
                 <div className="col-md-2">
-                  <h6>{provider.description}</h6>
+                  <h6>{provider.desc}</h6>
                 </div>
                 <div className="col-md-2">
                   <h7>
@@ -195,8 +197,8 @@ class ProviderSignup extends Component {
                     <input
                       type="text"
                       className="form-control"
-                      name="employeeName"
-                      defaultValue={this.state.signupProviderData.employeeName}
+                      name="name"
+                      defaultValue={this.state.signupProviderData.name}
                       onChange={this.onChangehandler}
                       autoFocus={true}
                       aria-describedby="helpId"
@@ -229,8 +231,8 @@ class ProviderSignup extends Component {
                   <div className="col-md-4">
                     <textarea
                       className="form-control"
-                      name="description"
-                      defaultValue={this.state.signupProviderData.description}
+                      name="desc"
+                      defaultValue={this.state.signupProviderData.desc}
                       onChange={this.onChangehandler}
                       rows={3}
                       placeholder="Not exceeding 200 words"
