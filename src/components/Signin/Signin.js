@@ -6,7 +6,7 @@ import Form from '../Form'
 
 const Signin = () => (
   <div className={styles.Signin} data-testid="Signin">
-    Signin Component with approrpiate form
+    Signin Component with appropriate form data
 
     <Form/>
   </div>
